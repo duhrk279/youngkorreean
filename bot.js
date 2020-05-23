@@ -7,7 +7,7 @@ const client = new tmi.Client({
 	},
 	identity: {
 		username: 'korreeanbot',
-		password: 'oauth:43mfcjt10vpsb15vproh1juqibzvki'
+		password: 'oauth:'
 	},
 	channels: [ 'youngkorreean' ]
 });
