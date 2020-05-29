@@ -1,4 +1,5 @@
 const tmi = require('tmi.js');
+const config = require('./config');
 const client = new tmi.Client({
 	options: { debug: true },
 	connection: {
@@ -7,7 +8,7 @@ const client = new tmi.Client({
 	},
 	identity: {
 		username: 'korreeanbot',
-		password: 'oauth:43mfcjt10vpsb15vproh1juqibzvki'
+        password: `${config.OAuth}`
 	},
 	channels: [ 'youngkorreean' ]
 });
