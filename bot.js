@@ -7,7 +7,7 @@ const client = new tmi.Client({
 	},
 	identity: {
 		username: 'korreeanbot',
-		password: 'oauth:'
+		password: 'oauth:43mfcjt10vpsb15vproh1juqibzvki'
 	},
 	channels: [ 'youngkorreean' ]
 });
@@ -152,6 +152,9 @@ client.on('message', (channel, tags, message, self, streakMonths, userstate, use
                 deathCount = 0;
                 console.log(`Death Counter zurückgesetzt!`);
             }
+        }
+        else if(message === '!dev') {
+            client.say(channel, "/me Der Bot wird mit der freundlichen Unterstützung von onemanpublisher (https://www.onemanpublisher.com) erstellt und gehostet!");
         }
     } else {
         return;
