@@ -1,5 +1,4 @@
 const tmi = require('tmi.js');
-const config = require('./config');
 const client = new tmi.Client({
 	options: { debug: true },
 	connection: {
@@ -8,7 +7,7 @@ const client = new tmi.Client({
 	},
 	identity: {
 		username: 'korreeanbot',
-        password: `${config.OAuth}`
+		password: 'oauth:43mfcjt10vpsb15vproh1juqibzvki'
 	},
 	channels: [ 'youngkorreean' ]
 });
@@ -17,6 +16,7 @@ Schandeinterval = null;
 Instainterval = null;
 BotOnline = null;
 let deathCount = 0;
+let gta = false;
 
 client.connect();
 
@@ -98,6 +98,9 @@ client.on('message', (channel, tags, message, self, streakMonths, userstate, use
         else if(message === '!zusteller') {
             client.say(channel, '/me Luan?');
         }
+	else if(message === '!dönerverkäufer') {
+	    client.say(channel, '/me Baris?');
+	}
         else if(message === '!testsub') {
             subscription(channel, tags.username);
         }
@@ -122,7 +125,7 @@ client.on('message', (channel, tags, message, self, streakMonths, userstate, use
                 StopInstainterval();
             }
             BotOnline = false;
-            deathCount = 0;
+	    gta = false;
         }
         // else if(message === '!commands') {
         //     client.say(channel, `/me @${tags.username}, eine Liste aller Befehle findest du hier: https://lucakohls.de/korreanBot`);
@@ -140,19 +143,27 @@ client.on('message', (channel, tags, message, self, streakMonths, userstate, use
             client.say(channel, `youngk20SCHANDE`);
         }
         else if(message === '!tod') {
-            if(userstate.mod) {
-                deathCount++;
-                console.log("Jemand ist gestorben, nun sind es " + deathCount + " Tode! Vollidioten");
-            }
+       	    deathCount++;
+            console.log("Jemand ist gestorben, nun sind es " + deathCount + " Tode! Vollidioten");
         }
         else if(message === '!death') {
-            client.say(channel, "/me In der Heist sind wir heute schon " + deathCount + " Mal gestorben!");
+            if(gta === true) {
+                client.say(channel, "/me In der Heist sind wir schon " + deathCount + " Mal gestorben!");
+            } else {
+                client.say(channel, "/me Es wird gerade kein GTA gespielt!");
+            }
+        }
+        else if(message === '!gta') {
+            gta = true;
+            console.log(`GTA ist nun an!`);
+        }
+        else if(message === '!nogta') {
+            gta = false;
+            console.log(`GTA ist nun aus!`);
         }
         else if(message === '!reset') {
-            if(userstate.mod) {
-                deathCount = 0;
-                console.log(`Death Counter zurückgesetzt!`);
-            }
+            deathCount = 0;
+            console.log(`Death Counter zurückgesetzt!`);
         }
         else if(message === '!dev') {
             client.say(channel, "/me Der Bot wird mit der freundlichen Unterstützung von onemanpublisher (https://www.onemanpublisher.com) erstellt und gehostet!");

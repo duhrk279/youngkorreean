@@ -1,1 +1,1 @@
-node tmi.js/bot.js
+node bot.js
